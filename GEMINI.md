@@ -27,7 +27,7 @@ Always check the docs when the behavior is uncertain or the user hits an unexpec
 - **Icons:** `@lucide/astro` for tree-shakable SVG icons
 - **Tooling:** Biome (v2.x) for linting and formatting (excluding `.astro` files)
 - **Type Safety:** TypeScript ^6 in strict mode
-- **Package Manager:** pnpm (Node >= 22.12.0)
+- **Package Manager:** pnpm (default, Node >= 22.12.0); npm/yarn/bun also work
 
 ## Architecture & Directory Structure
 
@@ -40,16 +40,18 @@ Always check the docs when the behavior is uncertain or the user hits an unexpec
 
 ## Building and Running
 
+Replace `<pm>` with your package manager (`npm`, `yarn`, `pnpm`, `bun`, etc.).
+
 | Command | Description |
 | :--- | :--- |
-| `pnpm install` | Install all project dependencies |
-| `pnpm dev` | Start the development server at `localhost:4321` |
-| `pnpm build` | Build the production-ready site to `./dist/` |
-| `pnpm preview` | Locally preview the production build |
-| `pnpm astro check` | Run type-checking on `.astro` files |
-| `pnpm check` | Run Biome lint and format (with `--write`) |
-| `pnpm lint` | Run Biome lint only |
-| `pnpm format` | Run Biome format only |
+| `<pm> install` | Install all project dependencies |
+| `<pm> run dev` | Start the development server at `localhost:4321` |
+| `<pm> run build` | Build the production-ready site to `./dist/` |
+| `<pm> run preview` | Locally preview the production build |
+| `<pm> run astro check` | Run type-checking on `.astro` files |
+| `<pm> run check` | Run Biome lint and format (with `--write`) |
+| `<pm> run lint` | Run Biome lint only |
+| `<pm> run format` | Run Biome format only |
 
 ## Development Conventions
 
@@ -81,8 +83,8 @@ add the selector to `@layer base` or define a dedicated utility in `@theme` inst
   - **Quotes:** Single quotes for JS/TS, double quotes for JSX/HTML attributes.
   - **Semicolons:** Set to `asNeeded`.
   - **Indentation:** 2 spaces.
-- **Astro Files:** `.astro` files are excluded from Biome. Use `pnpm astro check` for validation.
-- **Pre-commit:** Always run `pnpm check` before finishing any code change.
+- **Astro Files:** `.astro` files are excluded from Biome. Use `<pm> run astro check` for validation.
+- **Pre-commit:** Always run `<pm> run check` before finishing any code change.
 
 ### Icons
 - Import icons from `@lucide/astro` (e.g., `import { Camera } from '@lucide/astro'`).

@@ -25,7 +25,7 @@ Always check the docs when the behavior is uncertain or the user hits an unexpec
 - **Astro 7** — file-based routing under `src/pages/`; `.astro` components use frontmatter (`---`) for server-side logic
 - **Tailwind CSS v4** — no `tailwind.config.*`; configured via `@theme` in `src/styles/global.css`; imported with `@import "tailwindcss"`
 - **TypeScript** — strict mode (`astro/tsconfigs/strict`)
-- **pnpm** — package manager (Node ≥ 22.12.0)
+- **pnpm** (default) — package manager (Node ≥ 22.12.0); npm/yarn/bun also work
 
 ## Project Structure
 
@@ -40,24 +40,26 @@ src/styles/global.css      # Tailwind entry — @theme tokens go here
 
 ## Dev Commands
 
+> Replace `<pm>` with your package manager (`npm`, `yarn`, `pnpm`, `bun`, etc.).
+
 ```sh
-pnpm dev          # localhost:4321
-pnpm build        # Build to ./dist/
-pnpm preview      # Preview production build
-pnpm astro check  # Type-check .astro files (separate from Biome)
-pnpm check        # Biome lint + format (run before finishing any change)
+<pm> run dev          # localhost:4321
+<pm> run build        # Build to ./dist/
+<pm> run preview      # Preview production build
+<pm> run astro check  # Type-check .astro files (separate from Biome)
+<pm> run check        # Biome lint + format (run before finishing any change)
 ```
 
-> `.astro` files are excluded from Biome. Run both `pnpm astro check` and `pnpm check` before finishing.
+> `.astro` files are excluded from Biome. Run both `<pm> run astro check` and `<pm> run check` before finishing.
 
 ## Code Style (Biome — no ESLint/Prettier)
 
 - Single quotes, semicolons `asNeeded`, trailing commas
 - JSX attributes use double quotes
 - 80-char line width, 2-space indent, LF line endings
-- `.astro` files are excluded from Biome — type-check with `pnpm astro check`
+- `.astro` files are excluded from Biome — type-check with `<pm> run astro check`
 
-**Always run `pnpm check` before finishing any code change.**
+**Always run `<pm> run check` before finishing any code change.**
 
 ## Tailwind v4 Rules
 

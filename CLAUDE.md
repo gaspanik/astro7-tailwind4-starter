@@ -10,15 +10,17 @@ If `DESIGN.md` exists in the project root, read it before starting any UI or fea
 
 ## Commands
 
+Replace `<pm>` with your package manager (`npm`, `yarn`, `pnpm`, `bun`, etc.).
+
 ```sh
-pnpm dev           # Start dev server at localhost:4321
-pnpm build         # Build production site to ./dist/
-pnpm preview       # Preview production build locally
-pnpm astro check   # Type-check .astro files
-pnpm check         # Biome check --write (lint + format combined)
-pnpm lint          # Biome lint --write
-pnpm format        # Biome format --write
-pnpm astro-upgrade # Upgrade Astro via @astrojs/upgrade
+<pm> run dev           # Start dev server at localhost:4321
+<pm> run build         # Build production site to ./dist/
+<pm> run preview       # Preview production build locally
+<pm> run astro check   # Type-check .astro files
+<pm> run check         # Biome check --write (lint + format combined)
+<pm> run lint          # Biome lint --write
+<pm> run format        # Biome format --write
+<pm> run astro-upgrade # Upgrade Astro via @astrojs/upgrade
 ```
 
 ## Astro Docs MCP (`mcp__AstroDocs__search_astro_docs`)
@@ -30,7 +32,7 @@ Use this tool over training-data knowledge for Astro-specific APIs, integrations
 - **Astro 7** — file-based routing under `src/pages/`; `.astro` components use frontmatter (`---`) for server-side logic
 - **Tailwind CSS v4** — via the `@tailwindcss/vite` plugin (no `tailwind.config.*`); imported in `src/styles/global.css`
 - **TypeScript** — strict mode via `astro/tsconfigs/strict`
-- **pnpm** — package manager (node ≥ 22.12.0 required)
+- **pnpm** (default) — package manager (node ≥ 22.12.0 required); npm/yarn/bun also work
 
 ## Architecture
 
@@ -52,11 +54,11 @@ Build script permissions are managed explicitly via `allowBuilds` in `pnpm-works
 
 ## Code Quality (Biome)
 
-No ESLint or Prettier. JS/TS/JSON/CSS is managed by **Biome**. `.astro` files are excluded from Biome — use `pnpm astro check` for type-checking them.
+No ESLint or Prettier. JS/TS/JSON/CSS is managed by **Biome**. `.astro` files are excluded from Biome — use `<pm> run astro check` for type-checking them.
 
 - Single quotes, semicolons `asNeeded`, trailing commas; JSX attributes use double quotes
 - 80-char line width, 2-space indent, LF line endings (`.editorconfig`)
-- Always run `pnpm check` before finishing any code change
+- Always run `<pm> run check` before finishing any code change
 
 ## Icons
 
