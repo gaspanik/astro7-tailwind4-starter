@@ -93,12 +93,13 @@ CLAUDE.md のガイドラインに厳密に従って実装すること：
   ```bash
   curl -s -o src/assets/images/<name>.webp "<figma-asset-url>"
   ```
-- コード内ではViteの `import` で参照する（直接URLは埋め込まない）：
+- コード内では `astro:assets` の `<Image />` コンポーネントで参照する（直接URLは埋め込まない）：
   ```astro
   ---
+  import { Image } from 'astro:assets';
   import heroImage from '../assets/images/hero.webp';
   ---
-  <img src={heroImage.src} alt="..." />
+  <Image src={heroImage} alt="..." />
   ```
 
 ### 4. 完了確認
