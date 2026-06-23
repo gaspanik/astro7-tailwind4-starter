@@ -1,12 +1,12 @@
-# Astro 6 + Tailwind CSS v4 Starter
+# Astro 7 + Tailwind CSS v4 Starter
 
-A minimal, opinionated starter for building static sites and web apps with **Astro 6**, **Tailwind CSS v4**, **Lucide icons**, and **Biome**.
+A minimal, opinionated starter for building static sites and web apps with **Astro 7**, **Tailwind CSS v4**, **Lucide icons**, and **Biome**.
 
 ## Stack
 
 | Tool | Version | Role |
 |---|---|---|
-| [Astro](https://astro.build) | ^6 | Framework / SSG |
+| [Astro](https://astro.build) | ^7 | Framework / SSG |
 | [Tailwind CSS](https://tailwindcss.com) | ^4 | Styling (via Vite plugin) |
 | [@lucide/astro](https://lucide.dev) | ^1 | Tree-shakable SVG icons |
 | [Biome](https://biomejs.dev) | 2.x (pinned) | Lint + Format |
@@ -97,6 +97,16 @@ Always run `<pm> run check` before committing.
 
 ## Security
 
-`.npmrc` sets `min-release-age=3`, blocking packages published fewer than 3 days ago (supported by npm v11+ and pnpm).
+`.npmrc` sets `min-release-age=3`, blocking packages published fewer than 3 days ago.
 
-`pnpm-workspace.yaml` lists packages allowed to run build scripts (`allowBuilds`).
+Build script permissions are managed via `allowBuilds` in `pnpm-workspace.yaml` and `allowScripts` in `package.json`. Only explicitly listed packages (e.g. `esbuild`, `sharp`, `fsevents`) may run install scripts.
+
+## Astro v7 Notable Changes
+
+If upgrading from v6, be aware of these breaking changes:
+
+- **Strict HTML validation** — The Rust compiler no longer auto-corrects invalid HTML. Unclosed tags produce errors.
+- **Whitespace handling** — Default changed to JSX-style (`compressHTML: 'jsx'`): whitespace between inline elements is collapsed. Add explicit spaces where needed, or set `compressHTML: true` in `astro.config.mjs` to restore the previous behavior.
+- **`src/fetch.ts` is reserved** — Used by Astro's advanced routing. Rename any file at that path and set `fetchFile` in config.
+- **Vite 8** — `package.json` includes an `overrides` entry pinning Vite to `^8`.
+- **Sätteri markdown** — New default Markdown processor (Rust-based). To keep remark/rehype plugins, reinstall `@astrojs/markdown-remark` and configure it explicitly.

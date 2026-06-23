@@ -1,5 +1,5 @@
 {
-  "name": "astro6-tailwind4-starter",
+  "name": "astro7-tailwind4-starter",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -18,7 +18,7 @@
   "dependencies": {
     "@lucide/astro": "^1.18.0",
     "@tailwindcss/vite": "^4.3.1",
-    "astro": "^6.4.4",
+    "astro": "^7.0.0",
     "tailwindcss": "^4.3.1"
   },
   "devDependencies": {
@@ -27,7 +27,7 @@
     "typescript": "^6.0.3"
   },
   "overrides": {
-    "vite": "^7"
+    "vite": "^8"
   },
   "allowScripts": {
     "esbuild": true,

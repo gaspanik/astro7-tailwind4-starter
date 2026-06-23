@@ -23,11 +23,11 @@ pnpm astro-upgrade # Upgrade Astro via @astrojs/upgrade
 
 ## Astro Docs MCP (`mcp__AstroDocs__search_astro_docs`)
 
-Use this tool over training-data knowledge for Astro-specific APIs, integrations, and configuration: component syntax, frontmatter, slots, Content Collections, Actions, View Transitions, SSR/SSG config, `astro.config.mjs` options, and any Astro 6 feature that may differ from earlier versions. Always check the docs when behavior is uncertain or the user hits an unexpected error.
+Use this tool over training-data knowledge for Astro-specific APIs, integrations, and configuration: component syntax, frontmatter, slots, Content Collections, Actions, View Transitions, SSR/SSG config, `astro.config.mjs` options, and any Astro 7 feature that may differ from earlier versions. Always check the docs when behavior is uncertain or the user hits an unexpected error.
 
 ## Stack
 
-- **Astro 6** — file-based routing under `src/pages/`; `.astro` components use frontmatter (`---`) for server-side logic
+- **Astro 7** — file-based routing under `src/pages/`; `.astro` components use frontmatter (`---`) for server-side logic
 - **Tailwind CSS v4** — via the `@tailwindcss/vite` plugin (no `tailwind.config.*`); imported in `src/styles/global.css`
 - **TypeScript** — strict mode via `astro/tsconfigs/strict`
 - **pnpm** — package manager (node ≥ 22.12.0 required)
@@ -42,14 +42,13 @@ Use this tool over training-data knowledge for Astro-specific APIs, integrations
 
 ## Package Security
 
-`.npmrc` enforces two project-wide constraints:
+`.npmrc` enforces one project-wide constraint:
 
-- `ignore-scripts=true` — suppresses postinstall scripts globally (supply-chain safety)
 - `min-release-age=3` — blocks packages published fewer than 3 days ago
 
-`pnpm-workspace.yaml` handles the exceptions: `allowBuilds: [esbuild, sharp]` grants build-script permission, and `minimumReleaseAgeExclude` exempts specific packages from the age gate.
+Build script permissions are managed explicitly via `allowBuilds` in `pnpm-workspace.yaml` and `allowScripts` in `package.json` (e.g. `esbuild`, `sharp`, `fsevents`). Only listed packages may run install scripts.
 
-**When adding a new dependency:** if it fails to install due to these constraints, add it to `allowBuilds` (if it needs build scripts) or `minimumReleaseAgeExclude` (if it was just published) in `pnpm-workspace.yaml`.
+**When adding a new dependency:** if it fails to install due to these constraints, add it to `allowBuilds` in `pnpm-workspace.yaml` (if it needs build scripts) or `minimumReleaseAgeExclude` (if it was just published).
 
 ## Code Quality (Biome)
 

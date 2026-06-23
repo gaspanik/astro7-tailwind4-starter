@@ -1,6 +1,6 @@
 # Copilot Instructions
 
-This project is an **Astro 6 + Tailwind CSS v4** starter. Full conventions are in [CLAUDE.md](../CLAUDE.md) — read it before starting any work.
+This project is an **Astro 7 + Tailwind CSS v4** starter. Full conventions are in [CLAUDE.md](../CLAUDE.md) — read it before starting any work.
 
 ## Design Reference
 
@@ -16,13 +16,13 @@ Use this tool when working with Astro-specific APIs, integrations, or configurat
 - Integrations: `@astrojs/react`, `@astrojs/tailwind`, `@astrojs/image`, etc.
 - Content Collections, Actions, View Transitions, SSR/SSG config
 - `astro.config.mjs` options and Vite plugin setup
-- Any Astro 6 feature that may differ from earlier versions
+- Any Astro 7 feature that may differ from earlier versions
 
 Always check the docs when the behavior is uncertain or the user hits an unexpected error.
 
 ## Stack
 
-- **Astro 6** — file-based routing under `src/pages/`; `.astro` components use frontmatter (`---`) for server-side logic
+- **Astro 7** — file-based routing under `src/pages/`; `.astro` components use frontmatter (`---`) for server-side logic
 - **Tailwind CSS v4** — no `tailwind.config.*`; configured via `@theme` in `src/styles/global.css`; imported with `@import "tailwindcss"`
 - **TypeScript** — strict mode (`astro/tsconfigs/strict`)
 - **pnpm** — package manager (Node ≥ 22.12.0)
@@ -144,7 +144,7 @@ import { Camera } from '@lucide/astro';
 
 ## Adding Dependencies
 
-`.npmrc` enforces `ignore-scripts=true` and `min-release-age=3`. If a package fails to install:
+`.npmrc` enforces `min-release-age=3`. Build script permissions are managed via `allowBuilds` in `pnpm-workspace.yaml` and `allowScripts` in `package.json`. If a package fails to install:
 
 - Needs build scripts → add to `allowBuilds` in `pnpm-workspace.yaml`
 - Just published → add to `minimumReleaseAgeExclude` in `pnpm-workspace.yaml`

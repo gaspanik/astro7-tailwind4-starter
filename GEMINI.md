@@ -1,10 +1,10 @@
-# Astro 6 + Tailwind CSS v4 Starter: Project Context
+# Astro 7 + Tailwind CSS v4 Starter: Project Context
 
 ## Design Reference
 
 If `DESIGN.md` exists in the project root, read it before starting any UI or feature work. It contains the site's design intent, color palette, typography, layout guidelines, and component conventions — treat it as the source of truth for visual and UX decisions.
 
-This project is a modern, performance-oriented starter for building static sites and web applications using Astro 6 and Tailwind CSS v4.
+This project is a modern, performance-oriented starter for building static sites and web applications using Astro 7 and Tailwind CSS v4.
 
 # MCP Tools
 
@@ -16,13 +16,13 @@ Use this tool when working with Astro-specific APIs, integrations, or configurat
 - Integrations: `@astrojs/react`, `@astrojs/tailwind`, `@astrojs/image`, etc.
 - Content Collections, Actions, View Transitions, SSR/SSG config
 - `astro.config.mjs` options and Vite plugin setup
-- Any Astro 6 feature that may differ from earlier versions
+- Any Astro 7 feature that may differ from earlier versions
 
 Always check the docs when the behavior is uncertain or the user hits an unexpected error.
 
 ## Project Overview
 
-- **Framework:** Astro 6 (Static Site Generator / Web Framework)
+- **Framework:** Astro 7 (Static Site Generator / Web Framework)
 - **Styling:** Tailwind CSS v4 (configured via Vite plugin, no standalone config file)
 - **Icons:** `@lucide/astro` for tree-shakable SVG icons
 - **Tooling:** Biome (v2.x) for linting and formatting (excluding `.astro` files)
@@ -90,8 +90,7 @@ add the selector to `@layer base` or define a dedicated utility in `@theme` inst
 - Use the `class` prop for Tailwind styling: `<Camera class="text-muted" />`.
 
 ## Security & Supply Chain
-- **Scripts:** `ignore-scripts=true` is enabled in `.npmrc` to prevent untrusted postinstall scripts.
-- **Package Maturity:** `min-release-age=3` (days) is enforced to block newly published packages.
-- **Dependency Management:** If a new dependency fails to install, add it to `allowBuilds` (for build scripts) or `minimumReleaseAgeExclude` (for new versions) in `pnpm-workspace.yaml`.
-- **Exceptions:** Managed in `pnpm-workspace.yaml`.
+- **Package Maturity:** `min-release-age=3` (days) is enforced via `.npmrc` to block newly published packages.
+- **Build Scripts:** Permitted packages (e.g. `esbuild`, `sharp`, `fsevents`) are listed in `allowBuilds` in `pnpm-workspace.yaml` and `allowScripts` in `package.json`. Only these may run install scripts.
+- **Dependency Management:** If a new dependency fails to install, add it to `allowBuilds` in `pnpm-workspace.yaml` (if it needs build scripts) or `minimumReleaseAgeExclude` (if it was just published).
 
