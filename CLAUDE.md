@@ -84,3 +84,13 @@ import { Camera } from '@lucide/astro';
 ```
 
 Props: `size` (default `24`), `color` (default `currentColor`), `stroke-width` (default `2`), `absoluteStrokeWidth`. Tailwind classes apply via the `class` prop.
+
+When a framework integration is added, install and use the matching Lucide package inside that framework's components:
+
+| Integration | Package | Use in |
+|---|---|---|
+| `@astrojs/react` | `lucide-react` | React components (`.tsx`); may also unify `.astro` imports |
+| `@astrojs/vue` | `lucide-vue-next` | Vue components (`.vue`) |
+| `@astrojs/svelte` | `lucide-svelte` | Svelte components (`.svelte`) |
+
+Never import `@lucide/astro` inside React/Vue/Svelte components — it only works in `.astro` files.

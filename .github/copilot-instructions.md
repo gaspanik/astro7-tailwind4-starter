@@ -155,6 +155,16 @@ import { Camera } from '@lucide/astro';
 | `color` | `currentColor` |
 | `stroke-width` | `2` |
 
+When a framework integration is added, install and use the matching Lucide package inside that framework's components:
+
+| Integration | Package | Use in |
+|---|---|---|
+| `@astrojs/react` | `lucide-react` | React components (`.tsx`); may also unify `.astro` imports |
+| `@astrojs/vue` | `lucide-vue-next` | Vue components (`.vue`) |
+| `@astrojs/svelte` | `lucide-svelte` | Svelte components (`.svelte`) |
+
+Never import `@lucide/astro` inside React/Vue/Svelte components — it only works in `.astro` files.
+
 ## Adding Dependencies
 
 `.npmrc` enforces `min-release-age=3`. Build script permissions are managed via `allowBuilds` in `pnpm-workspace.yaml` and `allowScripts` in `package.json`. If a package fails to install:

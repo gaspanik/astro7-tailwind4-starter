@@ -102,6 +102,16 @@ add the selector to `@layer base` or define a dedicated utility in `@theme` inst
 - Props: `size` (default 24), `color` (default currentColor), `stroke-width` (default 2).
 - Use the `class` prop for Tailwind styling: `<Camera class="text-muted" />`.
 
+When a framework integration is added, install and use the matching Lucide package inside that framework's components:
+
+| Integration | Package | Use in |
+|---|---|---|
+| `@astrojs/react` | `lucide-react` | React components (`.tsx`); may also unify `.astro` imports |
+| `@astrojs/vue` | `lucide-vue-next` | Vue components (`.vue`) |
+| `@astrojs/svelte` | `lucide-svelte` | Svelte components (`.svelte`) |
+
+Never import `@lucide/astro` inside React/Vue/Svelte components — it only works in `.astro` files.
+
 ## Security & Supply Chain
 - **Package Maturity:** `min-release-age=3` (days) is enforced via `.npmrc` to block newly published packages.
 - **Build Scripts:** Permitted packages (e.g. `esbuild`, `sharp`, `fsevents`) are listed in `allowBuilds` in `pnpm-workspace.yaml` and `allowScripts` in `package.json`. Only these may run install scripts.
