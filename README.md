@@ -110,3 +110,4 @@ If upgrading from v6, be aware of these breaking changes:
 - **`src/fetch.ts` is reserved** — Used by Astro's advanced routing. Rename any file at that path and set `fetchFile` in config.
 - **Vite 8** — `package.json` includes an `overrides` entry pinning Vite to `^8`.
 - **Sätteri markdown** — New default Markdown processor (Rust-based). To keep remark/rehype plugins, reinstall `@astrojs/markdown-remark` and configure it explicitly.
+- **Background dev server** — `astro dev --background` starts the server detached from the terminal; manage with `astro dev stop` / `astro dev status` / `astro dev logs`.

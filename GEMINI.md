@@ -45,13 +45,24 @@ Replace `<pm>` with your package manager (`npm`, `yarn`, `pnpm`, `bun`, etc.).
 | Command | Description |
 | :--- | :--- |
 | `<pm> install` | Install all project dependencies |
-| `<pm> run dev` | Start the development server at `localhost:4321` |
+| `<pm> run dev` | Start the development server at `localhost:4321` (for humans) |
 | `<pm> run build` | Build the production-ready site to `./dist/` |
 | `<pm> run preview` | Locally preview the production build |
 | `<pm> run astro check` | Run type-checking on `.astro` files |
 | `<pm> run check` | Run Biome lint and format (with `--write`) |
 | `<pm> run lint` | Run Biome lint only |
 | `<pm> run format` | Run Biome format only |
+
+**When you (as an AI agent) need to start the dev server** — whether acting autonomously or at the user's request — always use background mode to avoid blocking your terminal:
+
+```sh
+pnpm exec astro dev --background   # pnpm (default)
+npx astro dev --background         # npm
+yarn astro dev --background        # yarn
+bunx astro dev --background        # bun
+```
+
+Manage with: `astro dev stop` · `astro dev status` · `astro dev logs`
 
 ## Development Conventions
 

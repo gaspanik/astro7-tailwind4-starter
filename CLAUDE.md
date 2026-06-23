@@ -13,7 +13,7 @@ If `DESIGN.md` exists in the project root, read it before starting any UI or fea
 Replace `<pm>` with your package manager (`npm`, `yarn`, `pnpm`, `bun`, etc.).
 
 ```sh
-<pm> run dev           # Start dev server at localhost:4321
+<pm> run dev           # Start dev server at localhost:4321 (for humans)
 <pm> run build         # Build production site to ./dist/
 <pm> run preview       # Preview production build locally
 <pm> run astro check   # Type-check .astro files
@@ -22,6 +22,17 @@ Replace `<pm>` with your package manager (`npm`, `yarn`, `pnpm`, `bun`, etc.).
 <pm> run format        # Biome format --write
 <pm> run astro-upgrade # Upgrade Astro via @astrojs/upgrade
 ```
+
+**When you (as an AI agent) need to start the dev server** — whether acting autonomously or at the user's request — always use background mode to avoid blocking your terminal:
+
+```sh
+pnpm exec astro dev --background   # pnpm (default)
+npx astro dev --background         # npm
+yarn astro dev --background        # yarn
+bunx astro dev --background        # bun
+```
+
+Manage the background server with: `astro dev stop` · `astro dev status` · `astro dev logs`
 
 ## Astro Docs MCP (`mcp__AstroDocs__search_astro_docs`)
 

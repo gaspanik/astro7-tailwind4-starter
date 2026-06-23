@@ -43,12 +43,23 @@ src/styles/global.css      # Tailwind entry — @theme tokens go here
 > Replace `<pm>` with your package manager (`npm`, `yarn`, `pnpm`, `bun`, etc.).
 
 ```sh
-<pm> run dev          # localhost:4321
+<pm> run dev          # localhost:4321 (for humans)
 <pm> run build        # Build to ./dist/
 <pm> run preview      # Preview production build
 <pm> run astro check  # Type-check .astro files (separate from Biome)
 <pm> run check        # Biome lint + format (run before finishing any change)
 ```
+
+**When you (as an AI agent) need to start the dev server** — whether acting autonomously or at the user's request — always use background mode to avoid blocking your terminal:
+
+```sh
+pnpm exec astro dev --background   # pnpm (default)
+npx astro dev --background         # npm
+yarn astro dev --background        # yarn
+bunx astro dev --background        # bun
+```
+
+Manage with: `astro dev stop` · `astro dev status` · `astro dev logs`
 
 > `.astro` files are excluded from Biome. Run both `<pm> run astro check` and `<pm> run check` before finishing.
 
