@@ -1,0 +1,19 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300..700&display=swap"); */
+@import "tailwindcss";
+
+@theme {
+  /* --default-font-family: "Noto Sans JP", sans-serif; */
+  --default-font-family: "Gen Interface JP", sans-serif;
+  --heading-font-family: "Gen Interface JP Display", sans-serif;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--heading-font-family);
+  }
+}
