@@ -95,7 +95,7 @@ add the selector to `@layer base` or define a dedicated utility in `@theme` inst
   - **Semicolons:** Set to `asNeeded`.
   - **Indentation:** 2 spaces.
 - **Astro Files:** `.astro` files are excluded from Biome. Use `<pm> run astro check` for validation.
-- **Pre-commit:** Always run `<pm> run check` before finishing any code change.
+- **Pre-commit:** Always run both `<pm> run astro check` and `<pm> run check` before finishing any code change.
 
 ### Icons
 - Import icons from `@lucide/astro` (e.g., `import { Camera } from '@lucide/astro'`).

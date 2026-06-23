@@ -69,7 +69,7 @@ No ESLint or Prettier. JS/TS/JSON/CSS is managed by **Biome**. `.astro` files ar
 
 - Single quotes, semicolons `asNeeded`, trailing commas; JSX attributes use double quotes
 - 80-char line width, 2-space indent, LF line endings (`.editorconfig`)
-- Always run `<pm> run check` before finishing any code change
+- Always run both `<pm> run astro check` and `<pm> run check` before finishing any code change
 
 ## Icons
 

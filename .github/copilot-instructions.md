@@ -70,7 +70,7 @@ Manage with: `astro dev stop` · `astro dev status` · `astro dev logs`
 - 80-char line width, 2-space indent, LF line endings
 - `.astro` files are excluded from Biome — type-check with `<pm> run astro check`
 
-**Always run `<pm> run check` before finishing any code change.**
+**Always run both `<pm> run astro check` and `<pm> run check` before finishing any code change.**
 
 ## Tailwind v4 Rules
 
