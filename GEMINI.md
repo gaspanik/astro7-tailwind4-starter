@@ -107,8 +107,8 @@ When a framework integration is added, install and use the matching Lucide packa
 | Integration | Package | Use in |
 |---|---|---|
 | `@astrojs/react` | `lucide-react` | React components (`.tsx`); may also unify `.astro` imports |
-| `@astrojs/vue` | `lucide-vue-next` | Vue components (`.vue`) |
-| `@astrojs/svelte` | `lucide-svelte` | Svelte components (`.svelte`) |
+| `@astrojs/vue` | `@lucide/vue` | Vue components (`.vue`) |
+| `@astrojs/svelte` | `@lucide/svelte` | Svelte components (`.svelte`) |
 
 Never import `@lucide/astro` inside React/Vue/Svelte components — it only works in `.astro` files.
 
