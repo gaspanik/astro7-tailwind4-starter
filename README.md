@@ -86,14 +86,11 @@ import { Camera } from '@lucide/astro'
 
 ## Code Style
 
-Biome handles lint and format for JS/TS/JSON/CSS. `.astro` files are excluded from Biome and checked via `<pm> run astro check` instead.
+No ESLint or Prettier. JS/TS/JSON/CSS is managed by **Biome**. `.astro` files are excluded from Biome — use `<pm> run astro check` for type-checking them.
 
-Key style rules (see `biome.json` for full config):
-- Single quotes, semicolons `asNeeded`, trailing commas
-- JSX attributes use double quotes
-- 80-char line width, 2-space indent, LF line endings
-
-Always run `<pm> run check` before committing.
+- Single quotes, semicolons `asNeeded`, trailing commas; JSX attributes use double quotes
+- 80-char line width, 2-space indent, LF line endings (`.editorconfig`)
+- Always run both `<pm> run astro check` and `<pm> run check` before finishing any code change
 
 ## Security
 
