@@ -54,7 +54,6 @@ Replace `<pm>` with your package manager (`npm`, `yarn`, `pnpm`, etc.).
 <pm> run lint          # Biome lint --write
 <pm> run format        # Biome format --write
 <pm> run check         # Biome check --write (lint + format combined)
-<pm> run astro-upgrade # Upgrade Astro via @astrojs/upgrade
 ```
 
 ## Tailwind v4 Configuration
