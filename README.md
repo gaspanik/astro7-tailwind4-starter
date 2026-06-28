@@ -93,7 +93,8 @@ No ESLint or Prettier. JS/TS/JSON/CSS is managed by **Biome**. `.astro` files ar
 
 ## Security
 
-`.npmrc` sets `min-release-age=3`, blocking packages published fewer than 3 days ago.
+`.npmrc` sets `min-release-age=1`, blocking packages published fewer than 1 day ago.
+`pnpm-workspace.yaml` sets `minimumReleaseAge: 1440`, blocking packages published fewer than 24 hours ago. This prevents accidental installs of malicious packages.
 
 Build script permissions are managed via `allowBuilds` in `pnpm-workspace.yaml` and `allowScripts` in `package.json`. Only explicitly listed packages (e.g. `esbuild`, `sharp`, `fsevents`) may run install scripts.
 
