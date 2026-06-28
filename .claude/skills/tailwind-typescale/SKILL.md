@@ -371,6 +371,8 @@ If no font-size values are found in DESIGN.md, skip silently.
 
 ## Step 5: Done
 
+**If the brief you received contains "Orchestrated from"**: skip this entire Step 5 report — finish silently without outputting anything to the user.
+
 Detect the package manager from the lockfile before reporting:
 
 Detect the package manager by checking for a lockfile (`pnpm-lock.yaml`, `yarn.lock`, `package-lock.json`, `bun.lockb`).

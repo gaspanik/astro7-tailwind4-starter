@@ -13,20 +13,29 @@ Generate a `DESIGN.md` file in the project root following the [Google design.md 
 
 ## Step 1: Determine the source
 
-First, check whether `DESIGN.md` already exists in the project root. If it does, ask the user with AskUserQuestion before proceeding:
+> **Before reading any files or exploring the codebase, complete this step in full.**
+> The source must be confirmed — either from a URL argument or via AskUserQuestion — before any other action.
+
+**Sub-step 1-A: Check for existing DESIGN.md**
+
+Check whether `DESIGN.md` already exists in the project root. If it does, call AskUserQuestion:
 
 - **Update it** — Regenerate `DESIGN.md` from a source of their choice (overwrites the existing file)
 - **Keep it** — Abort and leave the existing file as-is
 
 If the user chooses to keep it, stop here and report that the existing `DESIGN.md` was left unchanged.
 
-If the user chooses to update (or if no `DESIGN.md` exists), evaluate `$ARGUMENTS` using the following rules:
+**Sub-step 1-B: Classify the argument**
 
-- URL containing `figma.com` → **Figma mode**
-- URL ending in `.md`, or containing `raw.githubusercontent.com` / `github.com` → **DESIGN.md URL mode**
-- No argument → Ask the user with AskUserQuestion
+Classify `$ARGUMENTS` using this table — match the first row that applies:
 
-When asking, present these options:
+| `$ARGUMENTS` value | Action |
+|---|---|
+| URL containing `figma.com` | → **Figma mode** (proceed to Step 2, Figma section) |
+| URL ending in `.md`, or containing `github.com` / `raw.githubusercontent.com` | → **DESIGN.md URL mode** (proceed to Step 2A) |
+| Anything else — empty, plain text, Japanese, "please", "お願い", etc. | → **Call AskUserQuestion now** (see below) |
+
+If the argument does not clearly match a URL pattern, do not assume codebase mode and do not start reading files. Call AskUserQuestion with these options:
 
 - **Explore codebase** — Extract design information from the current project's code and CSS
 - **Figma URL** — Ask the user to provide a Figma design file URL
@@ -246,4 +255,4 @@ Report the following:
 - Lint result summary (number of errors / warnings / info)
 - Overview of key design tokens (colors, typography)
 
-**In orchestrated runs** (invoked from setup-project or another pipeline): keep this report to 1–2 lines and continue immediately with the orchestrator's next step in the same response — do not end the turn here.
+**In orchestrated runs** (invoked from mockup-pipeline or another pipeline): keep this report to 1–2 lines and continue immediately with the orchestrator's next step in the same response — do not end the turn here.
