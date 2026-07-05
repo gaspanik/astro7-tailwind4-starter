@@ -3,3 +3,5 @@ allowBuilds:
   sharp: true
   fsevents: true
 minimumReleaseAge: 1440
+overrides:
+  vite: ^8
