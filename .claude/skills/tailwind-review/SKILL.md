@@ -448,7 +448,15 @@ Figma MCP often writes font names directly as arbitrary values. Detect these pat
 
 When arbitrary px / em / rem values are found, read **`references/scale-tables.md`** (in this skill's directory) for the full conversion tables — font size, line height, letter spacing, font weight, and spacing/sizing — and suggest the closest scale utility. If the value falls between steps, mention both neighbours and ask the user to confirm.
 
-> **Tip:** Tailwind spacing scale follows `1 unit = 4px`. Divide px by 4 — a whole number means a standard utility exists; otherwise keep the arbitrary value. For obvious cases like this, the table lookup can be skipped.
+**Do not rely on table lookup alone for spacing/sizing (`w-`, `h-`, `p-`, `m-`, `gap-`, `top-`, `left-`, etc.) — run the detection script below first.** The reference table only lists common values; in Tailwind v4 the spacing scale is computed (`calc(var(--spacing) * N)`), so values not in the table (e.g. `w-[28px]`, `gap-[52px]`) are still convertible and get missed if you only visually scan the table.
+
+**Detection (v4 projects — computes N = px / 4 for every spacing-shaped arbitrary value and flags convertible vs. non-convertible):**
+
+```bash
+node -e "const fs=require('fs'),path=require('path');const EXTS=['.html','.tsx','.jsx','.vue','.astro'],SKIP=['node_modules','dist'];const PROPS='w|h|p|pt|pb|pl|pr|px|py|m|mt|mb|ml|mr|mx|my|gap|gap-x|gap-y|top|left|right|bottom|inset|space-x|space-y|size';const RE=new RegExp('\\\\b(?:'+PROPS+')-\\\\[(-?[0-9.]+)px\\\\]','g');function walk(d){return fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>{const p=path.join(d,e.name);return SKIP.some(s=>p.includes(s))?[]:e.isDirectory()?walk(p):EXTS.some(x=>e.name.endsWith(x))?[p]:[]});}let hits=0;for(const f of walk('.')){const ls=fs.readFileSync(f,'utf8').split('\n');ls.forEach((l,i)=>{let m;RE.lastIndex=0;while((m=RE.exec(l))){const px=parseFloat(m[1]);const n=px/4;const clean=Number.isInteger(n)||Math.abs(n*2-Math.round(n*2))<1e-9;console.log(f+':'+(i+1)+': '+m[0]+'  →  N='+n+(clean?'  (convertible, e.g. '+m[0].split('-[')[0]+'-'+n+')':'  (not a clean /4 step, keep arbitrary)'));hits++;}});}if(!hits)console.log('(no matches)');"
+```
+
+Every line this script marks `(convertible, ...)` must be converted to the numeric utility in the fix — do not leave it as an arbitrary value just because it wasn't in `scale-tables.md`. Lines marked `(not a clean /4 step, ...)` stay arbitrary. For v3 projects, skip this script and only convert values matching the fixed step list in `scale-tables.md`.
 
 **Report format:**
 ```
@@ -456,6 +464,11 @@ When arbitrary px / em / rem values are found, read **`references/scale-tables.m
   Issue: text-[16px] can be expressed as text-base (16px / 1rem)
   Current: class="text-[16px] leading-[1.5] tracking-[0.05em]"
   Fix:     class="text-base leading-normal tracking-wider"
+
+[Token] <filename>:<line>
+  Issue: gap-[52px] is not in the common table but is still a clean /4 step (52 / 4 = 13)
+  Current: class="gap-[52px]"
+  Fix:     class="gap-13"
 ```
 
 ---

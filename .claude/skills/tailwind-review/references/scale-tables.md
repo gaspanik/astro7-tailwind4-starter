@@ -59,7 +59,21 @@ Suggest the closest match. If the value falls between steps, mention both neighb
 | `font-[800]` | `font-extrabold` |
 | `font-[900]` | `font-black` |
 
-**Spacing / sizing — common values (`w-[*]`, `h-[*]`, `p-[*]`, `m-[*]`, `gap-[*]`, etc.)**
+**Spacing / sizing (`w-[*]`, `h-[*]`, `p-[*]`, `m-[*]`, `gap-[*]`, etc.)**
+
+> ⚠️ **v4 is formula-based, not a fixed lookup table.** Since Tailwind v4, the spacing scale is generated as `calc(var(--spacing) * N)` (default `--spacing: 0.25rem` = 4px) for **any** integer or half-integer `N` — not just a curated set of "common" numbers. This is a change from v3, which only shipped a fixed set of named steps (`0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 72, 80, 96`) with real gaps between them (e.g. no `28.5`, nothing between `12` and `14`).
+>
+> **The rule that actually matters:** in a v4 project, any arbitrary px value that is a clean multiple of 4 (or 2, for the `.5` steps) has a matching numeric utility, *even if that exact number isn't in the table below*. Compute it — don't just look it up:
+>
+> ```
+> N = px / 4        (e.g. 104px / 4 = 26 → w-26)
+> if N is a whole number or ends in .5 → utility exists, convert
+> otherwise → keep as arbitrary (e.g. 15px, 45px)
+> ```
+>
+> In a v3 project, only check against the fixed step list above — v3 does **not** support arbitrary `N` the way v4 does. If Dimension 2 detected v3, cross-reference against the named steps only.
+>
+> The table below lists common reference points, not the exhaustive set of valid values.
 
 | px value | Tailwind scale | rem |
 |---|---|---|
@@ -83,6 +97,3 @@ Suggest the closest match. If the value falls between steps, mention both neighb
 | 288px | `72` | 18rem |
 | 320px | `80` | 20rem |
 | 384px | `96` | 24rem |
-
-> **Tip:** Tailwind spacing scale follows `1 unit = 4px`. Divide px by 4 to get the scale number.
-> If the result is a whole number, a standard utility exists. If not, keep the arbitrary value.
