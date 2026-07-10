@@ -57,7 +57,7 @@ Use this tool over training-data knowledge for Astro-specific APIs, integrations
 
 `.npmrc` enforces one project-wide constraint:
 
-- `min-release-age=3` — blocks packages published fewer than 3 days ago
+- `min-release-age=1` — blocks packages published fewer than 1 day ago
 
 Build script permissions are managed explicitly via `allowBuilds` in `pnpm-workspace.yaml` and `allowScripts` in `package.json` (e.g. `esbuild`, `sharp`, `fsevents`). Only listed packages may run install scripts.
 
