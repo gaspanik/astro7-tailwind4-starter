@@ -1,64 +1,64 @@
 # Astro 7 + Tailwind CSS v4 Starter
 
-A minimal, opinionated starter for building static sites and web apps with **Astro 7**, **Tailwind CSS v4**, **Lucide icons**, and **Biome**.
+**Astro 7**、**Tailwind CSS v4**、**Lucide icons**、**Biome** を使った、静的サイト・Webアプリ構築のための最小限でオピニオンレイテッドなスターターです。
 
-## Stack
+## スタック
 
-| Tool | Version | Role |
+| ツール | バージョン | 役割 |
 |---|---|---|
-| [Astro](https://astro.build) | ^7 | Framework / SSG |
-| [Tailwind CSS](https://tailwindcss.com) | ^4 | Styling (via Vite plugin) |
-| [@lucide/astro](https://lucide.dev) | ^1 | Tree-shakable SVG icons |
-| [Biome](https://biomejs.dev) | 2.x (pinned) | Lint + Format |
-| TypeScript | ^6 | Type safety (strict mode) |
+| [Astro](https://astro.build) | ^7 | フレームワーク / SSG |
+| [Tailwind CSS](https://tailwindcss.com) | ^4 | スタイリング(Vite プラグイン経由) |
+| [@lucide/astro](https://lucide.dev) | ^1 | ツリーシェイク対応の SVG アイコン |
+| [Biome](https://biomejs.dev) | 2.x(固定) | Lint + Format |
+| TypeScript | ^7 | 型安全性(strict モード) |
 
-## Project Structure
+## プロジェクト構成
 
 ```text
 /
 ├── .github/
-│   ├── copilot-instructions.md  # GitHub Copilot guidelines
-│   └── prompts/                 # Reusable prompt templates (e.g. new-page)
+│   ├── copilot-instructions.md  # GitHub Copilot 向けガイドライン
+│   └── prompts/                 # 再利用可能なプロンプトテンプレート(例: new-page)
 ├── .vscode/
-│   ├── extensions.json          # Recommended extensions
-│   └── launch.json              # Debug configuration
+│   ├── extensions.json          # 推奨拡張機能
+│   └── launch.json              # デバッグ設定
 ├── public/
 │   ├── favicon.ico
 │   └── favicon.svg
 ├── src/
-│   ├── assets/          # Vite-processed assets (import to reference)
-│   ├── components/      # Reusable .astro components
+│   ├── assets/          # Vite が処理するアセット(import で参照)
+│   ├── components/      # 再利用可能な .astro コンポーネント
 │   ├── layouts/
-│   │   └── Layout.astro # Root HTML shell — global CSS imported here
-│   ├── pages/           # File-based routes (each .astro → a URL)
+│   │   └── Layout.astro # ルートの HTML シェル — グローバル CSS はここで import
+│   ├── pages/           # ファイルベースのルーティング(各 .astro が URL になる)
 │   └── styles/
-│       └── global.css   # @import "tailwindcss" + @theme tokens
-├── AGENTS.md            # AI agent guidelines (OpenAI Codex / generic)
-├── CLAUDE.md            # Claude Code guidelines
-├── GEMINI.md            # Gemini CLI guidelines
+│       └── global.css   # @import "tailwindcss" + @theme トークン
+├── AGENTS.md            # AI エージェント向けガイドライン(OpenAI Codex / 汎用)
+├── CLAUDE.md            # Claude Code 向けガイドライン
+├── GEMINI.md            # Gemini CLI 向けガイドライン
 ├── astro.config.mjs
 ├── biome.json
 └── package.json
 ```
 
-## Commands
+## コマンド
 
-Replace `<pm>` with your package manager (`npm`, `yarn`, `pnpm`, etc.).
+`<pm>` は使用しているパッケージマネージャー(`npm`、`yarn`、`pnpm` など)に置き換えてください。
 
 ```sh
-<pm> install           # Install dependencies
-<pm> run dev           # Start dev server at localhost:4321
-<pm> run build         # Build production site to ./dist/
-<pm> run preview       # Preview production build locally
-<pm> run astro check   # Type-check .astro files
+<pm> install           # 依存パッケージをインストール
+<pm> run dev           # localhost:4321 で開発サーバーを起動
+<pm> run build         # 本番用サイトを ./dist/ にビルド
+<pm> run preview       # 本番ビルドをローカルでプレビュー
+<pm> run astro check   # .astro ファイルの型チェック
 <pm> run lint          # Biome lint --write
 <pm> run format        # Biome format --write
-<pm> run check         # Biome check --write (lint + format combined)
+<pm> run check         # Biome check --write(lint + format をまとめて実行)
 ```
 
-## Tailwind v4 Configuration
+## Tailwind v4 の設定
 
-No `tailwind.config.js`. All theme customization lives in `src/styles/global.css`:
+`tailwind.config.js` はありません。テーマのカスタマイズはすべて `src/styles/global.css` に集約されています。
 
 ```css
 @import "tailwindcss";
@@ -69,11 +69,11 @@ No `tailwind.config.js`. All theme customization lives in `src/styles/global.css
 }
 ```
 
-Define project-specific colors as `@theme` tokens (e.g. `--color-muted`) instead of using raw Tailwind scale utilities.
+プロジェクト固有の色は、生の Tailwind スケールユーティリティを使うのではなく `@theme` トークン(例: `--color-muted`)として定義してください。
 
-## Icons
+## アイコン
 
-Import any [Lucide](https://lucide.dev/icons/) icon by name from `@lucide/astro`:
+[Lucide](https://lucide.dev/icons/) のアイコンは `@lucide/astro` から名前で import して使えます。
 
 ```astro
 ---
@@ -83,28 +83,28 @@ import { Camera } from '@lucide/astro'
 <Camera size={24} class="text-muted" />
 ```
 
-## Code Style
+## コードスタイル
 
-No ESLint or Prettier. JS/TS/JSON/CSS is managed by **Biome**. `.astro` files are excluded from Biome — use `<pm> run astro check` for type-checking them.
+ESLint や Prettier は使用しません。JS/TS/JSON/CSS は **Biome** が管理します。`.astro` ファイルは Biome の対象外なので、型チェックには `<pm> run astro check` を使ってください。
 
-- Single quotes, semicolons `asNeeded`, trailing commas; JSX attributes use double quotes
-- 80-char line width, 2-space indent, LF line endings (`.editorconfig`)
-- Always run both `<pm> run astro check` and `<pm> run check` before finishing any code change
+- シングルクォート、セミコロンは `asNeeded`、末尾カンマあり。JSX の属性はダブルクォート
+- 80 文字の行幅、2 スペースインデント、LF 改行(`.editorconfig`)
+- コード変更を完了する前に、必ず `<pm> run astro check` と `<pm> run check` の両方を実行する
 
-## Security
+## セキュリティ
 
-`.npmrc` sets `min-release-age=1`, blocking packages published fewer than 1 day ago.
-`pnpm-workspace.yaml` sets `minimumReleaseAge: 1440`, blocking packages published fewer than 24 hours ago. This prevents accidental installs of malicious packages.
+`.npmrc` で `min-release-age=1` を設定し、公開から 1 日未満のパッケージのインストールをブロックしています。
+`pnpm-workspace.yaml` では `minimumReleaseAge: 1440` を設定し、公開から 24 時間未満のパッケージをブロックしています。これにより悪意のあるパッケージの誤インストールを防ぎます。
 
-Build script permissions are managed via `allowBuilds` in `pnpm-workspace.yaml` and `allowScripts` in `package.json`. Only explicitly listed packages (e.g. `esbuild`, `sharp`, `fsevents`) may run install scripts.
+ビルドスクリプトの実行権限は `pnpm-workspace.yaml` の `allowBuilds` と `package.json` の `allowScripts` で管理されています。明示的にリストされたパッケージ(例: `esbuild`、`sharp`、`fsevents`)のみがインストールスクリプトを実行できます。
 
-## Astro v7 Notable Changes
+## Astro v7 の主な変更点
 
-If upgrading from v6, be aware of these breaking changes:
+v6 からアップグレードする場合は、以下の破壊的変更に注意してください。
 
-- **Strict HTML validation** — The Rust compiler no longer auto-corrects invalid HTML. Unclosed tags produce errors.
-- **Whitespace handling** — Default changed to JSX-style (`compressHTML: 'jsx'`): whitespace between inline elements is collapsed. Add explicit spaces where needed, or set `compressHTML: true` in `astro.config.mjs` to restore the previous behavior.
-- **`src/fetch.ts` is reserved** — Used by Astro's advanced routing. Rename any file at that path and set `fetchFile` in config.
-- **Vite 8** — `package.json` includes an `overrides` entry pinning Vite to `^8`.
-- **Sätteri markdown** — New default Markdown processor (Rust-based). To keep remark/rehype plugins, reinstall `@astrojs/markdown-remark` and configure it explicitly.
-- **Background dev server** — `astro dev --background` starts the server detached from the terminal; manage with `astro dev stop` / `astro dev status` / `astro dev logs`.
+- **HTML の厳格な検証** — Rust 製コンパイラは不正な HTML を自動修正しなくなりました。閉じタグ忘れはエラーになります。
+- **空白の扱い** — デフォルトが JSX スタイル(`compressHTML: 'jsx'`)に変更され、インライン要素間の空白は圧縮されます。必要な箇所には明示的にスペースを追加するか、`astro.config.mjs` で `compressHTML: true` を設定して以前の挙動に戻してください。
+- **`src/fetch.ts` は予約済み** — Astro の高度なルーティングで使用されます。このパスにファイルがある場合はリネームし、設定で `fetchFile` を指定してください。
+- **Vite 8** — `package.json` に Vite を `^8` に固定する `overrides` エントリが含まれています。
+- **Sätteri markdown** — 新しいデフォルトの Markdown プロセッサ(Rust 製)。remark/rehype プラグインを使い続ける場合は `@astrojs/markdown-remark` を再インストールし、明示的に設定してください。
+- **バックグラウンド開発サーバー** — `astro dev --background` はターミナルから切り離された状態でサーバーを起動します。`astro dev stop` / `astro dev status` / `astro dev logs` で管理してください。
