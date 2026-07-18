@@ -10,7 +10,7 @@
 | [Tailwind CSS](https://tailwindcss.com) | ^4 | スタイリング(Vite プラグイン経由) |
 | [@lucide/astro](https://lucide.dev) | ^1 | ツリーシェイク対応の SVG アイコン |
 | [Biome](https://biomejs.dev) | 2.x(固定) | Lint + Format |
-| TypeScript | ^7 | 型安全性(strict モード) |
+| TypeScript | ^6 | 型安全性(strict モード) |
 
 ## プロジェクト構成
 
