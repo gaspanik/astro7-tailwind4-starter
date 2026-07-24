@@ -12,7 +12,8 @@ description: >
   · Asked to check HTML accessibility structure: `aria-label`, `ul/li`, `button type`, `label`, etc.
   · Asked to review `.html`, `.tsx`, `.jsx`, `.vue`, or `.astro` files (if Tailwind is used)
   Framework-agnostic (HTML / React / Vue / Svelte / Astro, etc.).
-  Also use for vague requests like "something looks off with the classes", "the design changed after upgrading to v4", or "migrating from CSS modules".
+  Also use for vague requests like "something looks off with the classes" or "the design changed after upgrading to v4".
+  Scope: code that is already written in Tailwind. For migrating a codebase that isn't using Tailwind yet (plain CSS, Sass/SCSS) onto Tailwind for the first time, use `css-to-tailwind` instead.
 ---
 
 # Tailwind CSS Code Review & Optimization Skill
@@ -20,6 +21,8 @@ description: >
 ## Overview
 
 This skill reviews Tailwind CSS code across 5 dimensions and provides improvement suggestions or applies automatic fixes.
+
+By default this skill runs standalone and asks its own questions (Tailwind version handling, review scope) interactively. It can also be invoked by an orchestrator — if the brief you received contains **"Orchestrated from \<skill-name\>."**, skip any of the questions below for which the brief *also* supplies the answer (e.g. "review the whole project, Tailwind v4, apply all fixes without asking"), and use the supplied value instead. If the brief doesn't specify a particular answer, still ask that one normally — don't guess.
 
 ---
 
@@ -84,7 +87,7 @@ This determines how Dimension 2 (v3→v4 migration check) is handled.
 
 ---
 
-**If v3 is detected → ask via `AskUserQuestion`:**
+**If v3 is detected → ask via `AskUserQuestion`** (unless an orchestrated brief already states whether to review-only or migrate — use that instead):
 
 > "Tailwind CSS v3 detected. How would you like to proceed?"
 >
@@ -102,7 +105,7 @@ If v3 patterns are found in a v4 project, report them as bugs.
 
 ---
 
-**If unknown → ask via `AskUserQuestion`:**
+**If unknown → ask via `AskUserQuestion`** (unless an orchestrated brief already states the version — use that instead):
 
 > "Could not determine the Tailwind version. Which are you using?"
 >
@@ -134,7 +137,7 @@ Detect section boundaries in this priority order:
 3. `<!-- ... -->` comment-delimited blocks
 4. Semantic elements: `<header>` / `<main>` / `<footer>` / `<nav>`
 
-Output the section list as plain text first, then use `AskUserQuestion` to ask the user which range to review.
+Output the section list as plain text first, then use `AskUserQuestion` to ask the user which range to review — unless an orchestrated brief already states the scope (e.g. "review the whole project"), in which case skip the question and use that scope directly.
 
 **Text output example (must appear before AskUserQuestion):**
 
