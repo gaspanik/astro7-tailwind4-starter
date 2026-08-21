@@ -45,6 +45,10 @@ Use this tool over training-data knowledge for Astro-specific APIs, integrations
 - **TypeScript** — strict mode via `astro/tsconfigs/strict`
 - **pnpm** (default) — package manager (node ≥ 22.12.0 required); npm/yarn/bun also work
 
+## Typography
+
+`src/styles/global.css` sets **Gen Interface JP** as the default typeface (`--default-font-family` / `--heading-font-family`), loaded via the CDN link in `src/layouts/Layout.astro`. Treat this as the starter's placeholder, not a fixed choice — swap it whenever the prompt names a different typeface, or a referenced Figma design specifies its own fonts.
+
 ## Architecture
 
 - `src/layouts/Layout.astro` — root HTML shell; import global CSS here
