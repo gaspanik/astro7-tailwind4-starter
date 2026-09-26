@@ -102,7 +102,7 @@ Convert Figma variable names (slash-separated) to kebab-case:
 - Collection name is used as a comment
 - The last path segment becomes the property name (e.g. `colors/brand/500` → `brand-500`)
 - Slash-separated groups are joined with hyphens (e.g. `font/size/xl` → `text-xl`)
-- If Figma uses hyphens to represent decimals in names (`0-5`, `1-5`), convert to underscores in CSS (`0_5`, `1_5`)
+- **Figma variable names cannot contain a literal `.`** (confirmed Figma API restriction: names may not contain `{ } . $`), so a source design system representing a decimal step (e.g. Tailwind's `0.5`/`1.5`/`2.5`/`3.5` spacing keys) is forced to spell it with a hyphen instead (`size/0-5`, `size/1-5`, …). When the last path segment matches `<int>-<single digit>` inside a numeric scale group (`size/*`, `font/size/*`, and similar), treat the hyphen as a stand-in decimal point and convert it **back to a literal period** in the CSS output (`0-5` → `0.5`, not `0_5`). This is required for the value to land on Tailwind's own reserved key (`--spacing-0.5`, matching Tailwind v4's real default theme, which is what makes classes like `p-0.5`/`gap-2.5` resolve correctly) — an underscore would just produce an inert, non-colliding property that silently fails to connect. Don't apply this substitution to segments that are plainly not decimal-shaped (e.g. a genuine multi-word name containing a hyphen).
 
 ### Property name prefix by type
 

@@ -33,7 +33,7 @@ Classify `$ARGUMENTS` using this table — match the first row that applies:
 |---|---|
 | URL containing `figma.com` | → **Figma mode** (proceed to Step 2, Figma section) |
 | URL ending in `.md`, or containing `github.com` / `raw.githubusercontent.com` | → **DESIGN.md URL mode** (proceed to Step 2A) |
-| Anything else — empty, plain text, Japanese, "please", "お願い", etc. | → **Call AskUserQuestion now** (see below) |
+| Anything else — empty, plain text in any language, "please", etc. | → **Call AskUserQuestion now** (see below) |
 
 If the argument does not clearly match a URL pattern, do not assume codebase mode and do not start reading files. Call AskUserQuestion with these options:
 
@@ -44,7 +44,7 @@ If the argument does not clearly match a URL pattern, do not assume codebase mod
 
 **If "Paste" is selected**: send this message and wait for the user's response:
 
-> "DESIGN.md の内容またはデザイン仕様をここに貼り付けてください。"
+> "Paste your DESIGN.md content or design spec here." (in the user's language)
 
 Store the pasted content and proceed to **Step 2 — Paste mode**.
 
@@ -153,9 +153,11 @@ components:
   button-outline:
     backgroundColor: "{colors.surface}"  # concrete color, never `transparent` (see lint notes)
     textColor: "{colors.primary}"
-    borderColor: "{colors.border}"       # keeps `colors.border` from being flagged as orphaned
     rounded: "{rounded.md}"
     padding: <px>
+  divider:
+    backgroundColor: "{colors.border}"   # keeps `colors.border` from being flagged as orphaned
+    height: 1px
   # add other components as needed
 ---
 ```
@@ -169,7 +171,7 @@ components:
 - **lineHeight**: number or Dimension (e.g. `1.6` or `24px`)
 - `colors.primary` is required — omitting it triggers a `missing-primary` warning
 - **Utility colors are part of the spec**: real pages always need a `border` color (dividers, outlines, card borders), and designs with tinted sections or placeholder blocks need a subtle background variant (e.g. `surface-alt`). Define these in the `colors` frontmatter — **never in prose only**. Downstream pipeline steps (tailwind-typescale, create-mockup) read tokens from the frontmatter; a color mentioned only in the body is invisible to them
-- **Reference every custom color from at least one component.** The linter's orphaned-token check exempts only the MD3 standard families (`primary`, `secondary`, `tertiary`, `error`, `surface`, `background`, `outline`); every other color name (`accent`, `muted`, `border`, `surface-alt`, …) gets flagged unless a component references it. Components accept arbitrary property names, so wire them up like `button-outline.borderColor: "{colors.border}"`, `caption.textColor: "{colors.muted}"`
+- **Reference every custom color from at least one component.** The linter's orphaned-token check exempts only the MD3 standard families (`primary`, `secondary`, `tertiary`, `error`, `surface`, `background`, `outline`); every other color name (`accent`, `muted`, `border`, `surface-alt`, …) gets flagged unless a component references it. Only these component sub-tokens are valid: `backgroundColor`, `textColor`, `typography`, `rounded`, `padding`, `size`, `height`, `width` — the linter flags anything else (e.g. `borderColor`) as `broken-ref`. So wire utility colors up through valid sub-tokens, like `divider.backgroundColor: "{colors.border}"` (with `height: 1px`), `caption.textColor: "{colors.muted}"`
 - Ensure WCAG AA contrast ratio (4.5:1) for `backgroundColor` / `textColor` pairs in components
 - **Component completeness**: `button-*` components that define `backgroundColor` must also define `padding`; omitting `padding` leaves button height undefined in previews
 
@@ -235,7 +237,7 @@ Review the results:
 - **warning** → review and fix where possible (contrast ratio issues, orphaned tokens, etc.)
 - **info** → no action needed
 
-> **⚠️ Never fix an orphaned-token warning by deleting a utility color** (`border`, `surface-alt`, `muted`, etc.) from the frontmatter. Instead, reference it from a component (e.g. `button-outline.borderColor: "{colors.border}"`) or leave the warning as-is. Moving the definition into prose breaks the downstream pipeline, which reads colors from the frontmatter only. (Only the MD3 standard families `primary` / `secondary` / `tertiary` / `error` / `surface` / `background` / `outline` are exempt from this check.)
+> **⚠️ Never fix an orphaned-token warning by deleting a utility color** (`border`, `surface-alt`, `muted`, etc.) from the frontmatter. Instead, reference it from a component through a valid sub-token (e.g. `divider.backgroundColor: "{colors.border}"`) or leave the warning as-is. Moving the definition into prose breaks the downstream pipeline, which reads colors from the frontmatter only. (Only the MD3 standard families `primary` / `secondary` / `tertiary` / `error` / `surface` / `background` / `outline` are exempt from this check.)
 >
 > **⚠️ Never use `transparent` (or any alpha / non-opaque value) as a component `backgroundColor`.** The contrast-ratio rule converts colors to sRGB and computes textColor contrast against them, so `transparent` produces a bogus below-AA warning. For outline / ghost buttons, set `backgroundColor` to the concrete page surface color (e.g. `"{colors.surface}"`) instead. When fixing a contrast warning, substitute the concrete color — **never delete other tokens as part of the fix**.
 
